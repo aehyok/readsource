@@ -92,10 +92,7 @@ const demo44 = () => {
 
   let value = 100
   eval(`console.log(${value}+100)`)   // 200
-
-
 }
-
 
 function f(x: number) {
   console.log(x)
@@ -106,7 +103,14 @@ Function.prototype.once = function () {
   let self = this
   return function () {
     if (l) return l
-    let res = self.call(self, ...arguments)
+    // 改变this指向
+    // call 传入的是若干个参数
+    // let res = self.call(self, ...arguments)
+
+    // apply 传入的是若干个参数的数组
+    // let res = self.apply(self, [...arguments])
+
+    let res = f.bind(null, ...arguments)()
     l = res
     return l
   }
@@ -132,6 +136,32 @@ console.log(f1, f2, f3)
 
 let f4 = f(10)
 console.log(f4)
+
+
+// 多维数组对象，将values转换为一维数组
+const demo6 = () => {
+  
+let array= [
+  {
+    id: '1',
+    value: 'aehyok'
+  }, 
+  {
+    id: '2',
+    value: 'leo'
+  }
+]
+
+
+let newArray: any = []
+array.forEach(item => {
+  newArray = [...newArray, ...Object.values(item)]
+})
+
+console.log(newArray)
+
+console.log([1, 2, [3, 4], [[5,6]]].flat(3))
+}
 </script>
 
 <template>
