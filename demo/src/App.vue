@@ -37,25 +37,25 @@ const demo1 = () => {
   sub.emit('放假', '顶顶顶')
 }
 
-  const demo2 = () => {
-    // 定义一个目标对象
-    const subject = new Subject()
-    // 观察者
-    const stu1 = new Observer('弟子-无奈')
+const demo2 = () => {
+  // 定义一个目标对象
+  const subject = new Subject()
+  // 观察者
+  const stu1 = new Observer('弟子-无奈')
 
-    // 观察者
-    const stu2 = new Observer('弟子-无心')
+  // 观察者
+  const stu2 = new Observer('弟子-无心')
 
-    subject.addObserver(stu1)
-    subject.addObserver(stu2)
+  subject.addObserver(stu1)
+  subject.addObserver(stu2)
 
-    const warTask = {
-      taskType :'war',
-      taskInfo : '猎杀时刻'
-    }
-
-    subject.notify(warTask)
+  const warTask = {
+    taskType: 'war',
+    taskInfo: '猎杀时刻'
   }
+
+  subject.notify(warTask)
+}
 
 // new Function
 const demo3 = () => {
@@ -83,7 +83,7 @@ const demo4 = () => {
   const fun = eval(code)
   console.log(typeof fun)
   console.log(fun)
-  console.log(fun(10,20))
+  console.log(fun(10, 20))
 }
 
 
@@ -96,11 +96,42 @@ const demo44 = () => {
 
 }
 
+
+function f(x: number) {
+  console.log(x)
+  return x * 2
+}
+Function.prototype.once = function () {
+  let l: any = null
+  let self = this
+  return function () {
+    if (l) return l
+    let res = self.call(self, ...arguments)
+    l = res
+    return l
+  }
+}
+
+const demo5 = () => {
+
+}
+
 // demo1()
 // demo2()
 // demo3()
-demo4()
+// demo4()
 // demo44()
+
+const ff: any = f.once()
+
+let f1 = ff(3)
+let f2 = ff(2)
+let f3 = ff(1)
+
+console.log(f1, f2, f3)
+
+let f4 = f(10)
+console.log(f4)
 </script>
 
 <template>
