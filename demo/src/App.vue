@@ -1,3 +1,23 @@
+<template>
+  <div class="flex">
+    <div class="flex-1">item1</div>
+    <div class="flex-2">item2</div>
+  </div>
+
+
+  <div class="grid">
+    <div class="grid-1">item1</div>
+    <div class="grid-2">item2</div>
+  </div>
+
+  <div class="container">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+  </div>
+</template>
 <script setup lang="ts">
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer'
@@ -9,12 +29,12 @@ const demo1 = () => {
   let sub = new Subscribe()
 
   // 订阅注册
-  sub.on('工资', '糖家三少', function (content) {
+  sub.on('工资', '糖家三少', function (content: any) {
     console.info(`工资发放了哟--通知，${content}`)
   })
 
   // 订阅注册
-  sub.on('工资', '糖糖', function (content) {
+  sub.on('工资', '糖糖', function (content: any) {
     console.log(`工资发放了哟--通知，${content}`)
   })
 
@@ -30,7 +50,7 @@ const demo1 = () => {
 
   console.log('============放假类型=========================')
   // 注册
-  sub.on('放假', '111', function (content) {
+  sub.on('放假', '111', function (content: any) {
     console.log(`公司准备放假了哟--通知，${content}`)
   })
 
@@ -162,10 +182,32 @@ console.log(newArray)
 
 console.log([1, 2, [3, 4], [[5,6]]].flat(3))
 }
-</script>
 
-<template>
-</template>
+const sleep = (time: number) => {
+  return new Promise<void>((resolve, reject) =>{
+    setTimeout(() => {
+      resolve()
+    }, time);
+  })
+}
+
+sleep(5000).then(res=> {
+    console.log(res, '1111111111111111111')
+})
+
+const executeCode = async() => {
+  for(let i = 0; i<5; i++) {
+    await sleep(1000)
+    console.log(i+1)
+  }
+} 
+
+// executeCode()
+
+
+const { a, b: y} = {a: 3, b: 4}
+console.log(a, y)
+</script>
 
 <style>
 #app {
@@ -176,4 +218,67 @@ console.log([1, 2, [3, 4], [[5,6]]].flat(3))
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.container {
+  display: grid;
+  /* grid布局四格均分 */
+  /* grid-template-columns: repeat(4, 1fr) */
+  grid-template-columns: 200px  200px;
+  grid-template-rows: 100px 1fr;
+  border: 1px solid blue;
+  grid-gap: 20px;
+}
+
+.item {
+  width: 200px;
+  border: 1px solid red;
+  height: 100px;
+}
+
+.flex {
+  width: 90vw;
+  height: 300px;
+  border: 1px solid blue;
+  display: flex;
+  /* flex-direction: row; */
+}
+
+.flex-1 {
+  flex-basis: 100px;
+  border: 1px solid red;
+  height: 100px;
+}
+
+.flex-2 {
+  flex: 1 1 auto;
+  border: 1px solid red;
+  height: 100px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: start;
+    border: 1px solid red;
+    height: 200px;
+}
+
+.wrapper-grid .left,
+.wrapper-grid .right {
+    box-sizing: border-box;
+}
+
+.grid .grid-1 {
+    grid-column: 1;
+    /* width: 150px; */
+    border: 1px solid blue;
+}
+
+.grid .grid-2 {
+    grid-column: 2;
+    border: 1px solid blue;
+}
+
+
+
 </style>
