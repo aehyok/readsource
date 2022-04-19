@@ -2,6 +2,7 @@
   <div class="flex">
     <div class="flex-1">item1</div>
     <div class="flex-2">item2</div>
+     <div class="flex-3">item2</div>
   </div>
 
 
@@ -22,6 +23,9 @@
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer'
 
+window.onunload = function () {
+  alert('准备离开页面')
+}
 const demo1 = () => {
   console.log('发布订阅模式')
 
@@ -225,33 +229,39 @@ console.log(a, y)
   /* grid-template-columns: repeat(4, 1fr) */
   grid-template-columns: 200px  200px;
   grid-template-rows: 100px 1fr;
-  border: 1px solid blue;
+  border: 1px dashed blue;
   grid-gap: 20px;
 }
 
 .item {
   width: 200px;
-  border: 1px solid red;
+  border: 1px dashed red;
   height: 100px;
 }
 
 .flex {
   width: 90vw;
   height: 300px;
-  border: 1px solid blue;
+  padding: 5px;
+  border: 1px dashed blue;
   display: flex;
   /* flex-direction: row; */
 }
 
 .flex-1 {
-  flex-basis: 100px;
-  border: 1px solid red;
+  flex-basis: 50px;
+  border: 1px dashed red;
   height: 100px;
 }
 
 .flex-2 {
-  flex: 1 1 auto;
-  border: 1px solid red;
+  flex: 1 2 auto;
+  border: 1px dashed red;
+  height: 100px;
+}
+.flex-3 {
+  flex: 2 1 auto;
+  border: 1px dashed red;
   height: 100px;
 }
 
@@ -259,7 +269,7 @@ console.log(a, y)
     display: grid;
     grid-template-columns: 120px 1fr;
     align-items: start;
-    border: 1px solid red;
+    border: 1px dashed red;
     height: 200px;
 }
 
@@ -271,12 +281,12 @@ console.log(a, y)
 .grid .grid-1 {
     grid-column: 1;
     /* width: 150px; */
-    border: 1px solid blue;
+    border: 1px dashed blue;
 }
 
 .grid .grid-2 {
     grid-column: 2;
-    border: 1px solid blue;
+    border: 1px dashed blue;
 }
 
 
