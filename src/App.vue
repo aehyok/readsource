@@ -1,14 +1,14 @@
 <template>
   <div class="flex">
-    <div class="flex-1">item1</div>
-    <div class="flex-2">item2</div>
-     <div class="flex-3">item2</div>
+    <div class="flex-1">flex1</div>
+    <div class="flex-2">flex2</div>
+     <div class="flex-3">flex3</div>
   </div>
 
 
   <div class="grid">
-    <div class="grid-1">item1</div>
-    <div class="grid-2">item2</div>
+    <div class="grid-1">grid1</div>
+    <div class="grid-2">grid2</div>
   </div>
 
   <div class="container">
@@ -267,10 +267,13 @@ console.log(a, y)
 
 .grid {
     display: grid;
+    grid-gap: 20px;
     grid-template-columns: 120px 1fr;
     align-items: start;
     border: 1px dashed red;
-    height: 200px;
+    height: 100px;
+    min-width: 450px;
+    margin: 30px 0;
 }
 
 .wrapper-grid .left,
