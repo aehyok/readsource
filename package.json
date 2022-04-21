@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "vconsole": "^3.14.6",
     "vue": "^3.2.25"
   },
   "devDependencies": {

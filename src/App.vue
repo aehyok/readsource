@@ -5,7 +5,8 @@
       id="canvas"
       width="400"
       height="300"
-      @touchstart="canvasDown($event)"
+      @touchstart="touchStart($event)"
+      @touchmove="touchMove($event)"
       @mousedown="canvasDown($event)"
       @mousemove="canvasMove($event)"
       @mouseup="canvasUp()"
@@ -44,6 +45,7 @@ import { ref, reactive, onMounted } from 'vue'
 
 // https://blog.csdn.net/qq_16151185/article/details/115766092
 // https://segmentfault.com/a/1190000021921156
+// https://github.com/JaimeCheng/vue-esign/blob/master/src/index.vue 移动端参考
 const myCanvas = ref(null);
 
     const data = reactive({
@@ -69,6 +71,7 @@ const myCanvas = ref(null);
       oA.remove(); // 下载之后把创建的元素删除
       data.imgSrc = "";
     };
+    //PC 端鼠标按下
     const canvasDown = (e) => {
       data.canvasMoveUse = true;
       const canvasX = e.offsetX;
@@ -76,6 +79,39 @@ const myCanvas = ref(null);
       data.ctx.beginPath(); // 移动的起点
       data.ctx.moveTo(canvasX, canvasY);
     };
+
+    const touchStart = (e) => {
+      e = e || event
+      e.preventDefault()
+      data.canvasMoveUse = true
+      if (e.touches.length === 1) {
+        let obj = {
+          x: e.targetTouches[0].clientX - myCanvas.value.getBoundingClientRect().left,
+          y: e.targetTouches[0].clientY - myCanvas.value.getBoundingClientRect().top
+        }
+        // this.drawStart(obj)
+        console.log(obj, 'touchStart')
+        data.ctx.beginPath(); // 移动的起点
+        data.ctx.moveTo(obj.x, obj.y);
+      }
+    }
+
+    const touchMove = (e) => {
+      console.log('move', e)
+        if (data.canvasMoveUse) {
+        let canvasX;
+        let canvasY;
+        // canvasX = e.offsetX;
+        canvasX = e.targetTouches[0].clientX - myCanvas.value.getBoundingClientRect().left
+
+        // canvasY = e.offsetY;
+        canvasY = e.targetTouches[0].clientY - myCanvas.value.getBoundingClientRect().top
+        data.ctx.lineTo(canvasX, canvasY);
+        // data.ctx.arc(0, 0, 5, 0, 2 * Math.PI)
+        data.ctx.stroke();
+      }
+    }
+    // PC端鼠标移动
     const canvasMove = (e) => {
       if (data.canvasMoveUse) {
         let canvasX;
@@ -87,10 +123,14 @@ const myCanvas = ref(null);
         data.ctx.stroke();
       }
     };
+
+    //PC端鼠标抬起
     const canvasUp = () => {
       data.canvasMoveUse = false;
       console.log('up over')
     };
+
+    //PC端鼠标移出
     const canvasLeave = () => {
       data.canvasMoveUse = false;
       console.log('leave over')
