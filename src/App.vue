@@ -45,8 +45,7 @@ import { ref, reactive, onMounted } from 'vue'
 
 // https://blog.csdn.net/qq_16151185/article/details/115766092
 // https://segmentfault.com/a/1190000021921156
-// https://github.com/JaimeCheng/vue-esign/blob/master/src/index.vue 移动端参考
-const myCanvas = ref(null);
+  const myCanvas = ref(null);
 
     const data = reactive({
       ctx: null,
@@ -138,7 +137,12 @@ const myCanvas = ref(null);
 
     onMounted(() => {
       data.ctx = myCanvas.value.getContext("2d");
+      myCanvas.value.style.background = '#f2f3f7'
       data.ctx.lineWidth = 5;
+      data.ctx.shadowColor = 'yellow'
+      data.ctx.shadowOffsetX = 5;
+      data.ctx.shadowOffsetY = 5
+      data.ctx.strokeStyle = 'black'
     });
 
 
