@@ -1,4 +1,6 @@
 <template>
+  <div>{{state.msg}}</div>
+  <HelloWorldVue :msg="state" />
   <div id="signatureBox" @touchmove.prevent>
     <canvas
       ref="myCanvas"
@@ -41,9 +43,13 @@
 <script setup lang="ts">
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer'
+import HelloWorldVue from './components/HelloWorld.vue';
 import { ref, reactive, onMounted } from 'vue'
 import { hierarchy, pack } from 'd3-hierarchy'
 
+const state = reactive ({
+  msg: 'aehyok'
+})
 // https://blog.csdn.net/qq_16151185/article/details/115766092
 // https://segmentfault.com/a/1190000021921156
   const myCanvas = ref(null);
