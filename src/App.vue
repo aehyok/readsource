@@ -42,6 +42,7 @@
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer'
 import { ref, reactive, onMounted } from 'vue'
+import { hierarchy, pack } from 'd3-hierarchy'
 
 // https://blog.csdn.net/qq_16151185/article/details/115766092
 // https://segmentfault.com/a/1190000021921156
@@ -321,6 +322,23 @@ const demo8 = () => {
   }
 }
 
+const demo9 = async() => {
+  const  dataSource = 'https://s5.ssl.qhres2.com/static/b0695e2dd30daa64.json'
+
+
+   const data = await (await fetch(dataSource)).json();
+  const regions = hierarchy(data)
+    .sum((d: any) => 1)
+    .sort((a: any, b: any) => b.value - a.value);
+
+  const packs = pack()
+    .size([1600, 1600])
+    .padding(3);
+
+  const root = packs(regions);
+
+  console.log(root, 'demo 9')
+}
 // demo1()
 // demo2()
 // demo3()
@@ -329,7 +347,7 @@ const demo8 = () => {
 // demo6()
 // demo7()
 // demo8()
-
+demo9()
 
 // executeCode()
 
