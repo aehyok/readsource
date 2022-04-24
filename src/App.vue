@@ -357,6 +357,41 @@ demo9()
 
 // executeCode()
 
+{
+const target = {}
+
+let proxy = new Proxy(target, {
+  get(obj: any, key: string) {
+    return key in obj ? obj[key] : 'hello world'
+  },
+  set(obj: any, key: string, value: any) {
+    obj[key] = value
+    return true
+  }
+})
+
+console.log(proxy, 'proxy')
+console.log(proxy['test']);
+proxy['liu'] = '刘'
+console.log(proxy, 'liu');
+
+}
+
+{
+  const target = {}
+  let key = 'a'
+  Object.defineProperty(target, key, {
+    get() {
+      return "ak"
+    },
+    set(val) {
+      
+    }
+  })
+}
+
+
+
 
 </script>
 
