@@ -1,5 +1,7 @@
 <template>
-  <div class="flex">
+  <div>{{state.msg}}</div>
+  <helloWorld  v-model:msg="state.msg" ></helloWorld>
+  <!-- <div class="flex">
     <div class="flex-1">flex1</div>
     <div class="flex-2">flex2</div>
      <div class="flex-3">flex3</div>
@@ -17,12 +19,17 @@
     <div class="item">3</div>
     <div class="item">4</div>
     <div class="item">5</div>
-  </div>
+  </div> -->
 </template>
 <script setup lang="ts">
+import helloWorld from './components/HelloWorld.vue'
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer'
+import { reactive, ref } from 'vue';
 
+const state = reactive({
+  msg : '初始化'
+})
 window.onunload = function () {
   alert('准备离开页面')
 }
