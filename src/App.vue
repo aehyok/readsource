@@ -42,10 +42,11 @@
 </template>
 <script setup lang="ts">
 import { Subscribe } from './utils/subscrbe'
-import { Observer, Subject } from './utils/observer'
+import { Observer, Subject } from './utils/observer';
 import HelloWorldVue from './components/HelloWorld.vue';
 import { ref, reactive, onMounted } from 'vue'
 import { hierarchy, pack } from 'd3-hierarchy'
+import { objectExpression } from '@babel/types';
 
 const state = reactive ({
   msg: 'aehyok'
@@ -353,42 +354,86 @@ const demo9 = async() => {
 // demo6()
 // demo7()
 // demo8()
-demo9()
+// demo9()
 
 // executeCode()
 
 {
-const target = {}
-
-let proxy = new Proxy(target, {
-  get(obj: any, key: string) {
-    return key in obj ? obj[key] : 'hello world'
-  },
-  set(obj: any, key: string, value: any) {
-    obj[key] = value
-    return true
-  }
-})
-
-console.log(proxy, 'proxy')
-console.log(proxy['test']);
-proxy['liu'] = '刘'
-console.log(proxy, 'liu');
-
-}
-
-{
-  const target = {}
-  let key = 'a'
-  Object.defineProperty(target, key, {
-    get() {
-      return "ak"
+  const targeta = {}
+const define = (obj: any) => {
+  return new Proxy(obj, {
+    get(obj: any, key: string) {
+      console.log('get')
+      return key in obj ? obj[key] : 'hello world'
     },
-    set(val) {
-      
+    set(obj: any, key: string, value: any) {
+      console.log('set')
+      obj[key] = value
+      return true
     }
   })
 }
+  // const target= define(targeta)
+  // console.log(target, 'proxy')
+  // console.log(target['test'], 'test');
+  // target['liu'] = '刘'
+
+  // console.log(target.liu, 'liu');
+  // // console.log(target.test?.a, 'liu');
+  // console.log(target.test?.a, 'liu');
+  // target.test = {}
+  // target.test.a = 10
+  // console.log(target, '---------')
+}
+
+
+// Object.defineProperty 解析
+// {
+//   const target : Record<string, any> = {
+//     a: 1,
+//     // b: 2
+//   }
+
+// const defineProperty = (obj: any, key: string, val: any) => {
+//   if(typeof val ==='object' ) {
+//     Observer(val)
+//   }
+//   Object.defineProperty(obj, key, {
+//     enumerable: true,
+//     configurable: true,
+//     get() {
+//       console.log('get', val)
+//       return val
+//     },
+//     set(newval) {
+//       if( typeof newval === "object" ){
+//         Observer(newval)
+//       }
+//       console.log('set old and new ', val, newval)
+//       val = newval
+//     }
+//   })
+// }
+
+// const Observer = (obj: any) => {
+//   if(typeof obj !=='object' || obj === null ) {
+//     return 
+//   }
+//   Object.keys(obj).forEach((key) => {
+//     defineProperty(obj, key, target[key])
+//   })
+// }
+
+// Observer(target)
+
+// // console.log(target, '打印初始化')
+// console.log(target.a, 'before')
+
+// // target.a = 10
+// // setTimeout(() => {
+// //   console.log(target.a, 'after')
+// // }, 500)
+// }
 
 
 
