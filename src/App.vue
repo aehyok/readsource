@@ -41,6 +41,7 @@
   </div> -->
 </template>
 <script setup lang="ts">
+import helloWorld from './components/HelloWorld.vue'
 import { Subscribe } from './utils/subscrbe'
 import { Observer, Subject } from './utils/observer';
 import HelloWorldVue from './components/HelloWorld.vue';

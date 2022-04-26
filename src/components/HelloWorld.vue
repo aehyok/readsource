@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const props = defineProps<{ msg: string }>()
+
+const {msg} = props
+const count = ref(0)
+const change = () => {
+  console.log('change----',props.msg)
+  msg.value = '11111111111111'
 const props = defineProps<{ msg: Object }>()
 
 let { msg } = props
@@ -15,8 +22,6 @@ const change = () => {
 <template>
   <h1 @click="change">{{ msg }}</h1>
 </template>
-
-<style scoped>
 a {
   color: #42b983;
 }
