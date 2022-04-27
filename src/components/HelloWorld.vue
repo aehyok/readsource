@@ -1,27 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = defineProps<{ msg: string }>()
-
-const {msg} = props
-const count = ref(0)
-const change = () => {
-  console.log('change----',props.msg)
-  msg.value = '11111111111111'
 const props = defineProps<{ msg: Object }>()
 
-let { msg } = props
-const count = ref(0)
-
+const {msg} = props
 const change = () => {
-  console.log(msg, 'child')
-  props.msg.msg = 'child'
+  console.log('change----',props.msg)
+  msg.msg= '11111111111111'
 }
 </script>
 
 <template>
   <h1 @click="change">{{ msg }}</h1>
 </template>
+<style>
 a {
   color: #42b983;
 }

@@ -365,26 +365,23 @@ const define = (obj: any) => {
   return new Proxy(obj, {
     get(obj: any, key: string) {
       console.log('get')
-      return key in obj ? obj[key] : 'hello world'
+      // return key in obj ? obj[key] : 'hello world'
+      return Reflect.get(obj, key)
     },
     set(obj: any, key: string, value: any) {
       console.log('set')
-      obj[key] = value
-      return true
+      // obj[key] = value
+      return Reflect.set(obj, key , value)
     }
   })
 }
-  // const target= define(targeta)
-  // console.log(target, 'proxy')
-  // console.log(target['test'], 'test');
-  // target['liu'] = '刘'
-
-  // console.log(target.liu, 'liu');
-  // // console.log(target.test?.a, 'liu');
+  const target= define(targeta)
+  console.log(target.liu, 'liu');
+  console.log(target.test?.a, 'test');
   // console.log(target.test?.a, 'liu');
   // target.test = {}
   // target.test.a = 10
-  // console.log(target, '---------')
+  console.log(target, '---------')
 }
 
 
