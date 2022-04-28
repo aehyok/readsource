@@ -359,32 +359,60 @@ const demo9 = async() => {
 
 // executeCode()
 
+// {
+//   const targeta = {}
+// const define = (obj: any) => {
+//   return new Proxy(obj, {
+//     get(target: any, key: string) {
+//       console.log('get', key)
+//       // return key in obj ? obj[key] : 'hello world'
+//       return Reflect.get(target, key)
+//     },
+//     set(target: any, key: string, value: any) {
+//       console.log('set', key, value)
+//       // obj[key] = value
+//       return Reflect.set(target, key , value)
+//     }
+//   })
+// }
+//   const target111= define(targeta)
+//   console.log(target111.liu, 'liu');
+//   // console.log(target.test?.a, 'test');
+//   // // console.log(target.test?.a, 'liu');
+//   target111.test = {}
+//   // // target.test.a = 10
+//   console.log(target111.test, '---------')
+
+//   console.log(targeta, 'targeta');
+
+//   // console.log(target111, 'target111')
+  
+
+
+//   target111.test = {
+//     a: 1,
+//     b: 2
+//   }
+//   console.log(target111.test, '---------')
+
+// }
+
 {
-  const targeta = {}
-const define = (obj: any) => {
-  return new Proxy(obj, {
-    get(obj: any, key: string) {
-      console.log('get')
-      // return key in obj ? obj[key] : 'hello world'
-      return Reflect.get(obj, key)
-    },
-    set(obj: any, key: string, value: any) {
-      console.log('set')
-      // obj[key] = value
-      return Reflect.set(obj, key , value)
-    }
-  })
-}
-  const target= define(targeta)
-  console.log(target.liu, 'liu');
-  console.log(target.test?.a, 'test');
-  // console.log(target.test?.a, 'liu');
-  // target.test = {}
-  // target.test.a = 10
-  console.log(target, '---------')
-}
+const raw: any = []
+const arr = new Proxy(raw, {
+  get(target, key) {
+    console.log('get', key)
+    return Reflect.get(target, key)
+  },
+  set(target, key, value) {
+    console.log('set', key)
+    return Reflect.set(target, key, value)
+  }
+})
 
+arr.push(1)
 
+}
 // Object.defineProperty 解析
 // {
 //   const target : Record<string, any> = {
